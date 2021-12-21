@@ -35,7 +35,7 @@ public class TaskController {
      //SAVE TASK REST API 
     
     @PostMapping
-    public ResponseEntity<Task> saveTask(@RequestBody Task tsTask){
+    public ResponseEntity saveTask(@RequestBody Task tsTask){
     
         return ResponseEntity.ok(taskService.saveTask(tsTask));
     }
@@ -48,7 +48,7 @@ public class TaskController {
     }
     
     //GET TASK BY ID REST API
-    @GetMapping("{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Task> getTasksById(@PathVariable("id")Long taskId){
         
         return ResponseEntity.ok(taskService.getTaskById(taskId));

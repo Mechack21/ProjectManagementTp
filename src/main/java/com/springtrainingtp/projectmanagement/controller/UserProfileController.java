@@ -6,7 +6,8 @@
 package com.springtrainingtp.projectmanagement.controller;
 
 import com.springtrainingtp.projectmanagement.model.Project;
-import com.springtrainingtp.projectmanagement.service.ProjectService;
+import com.springtrainingtp.projectmanagement.model.UserProfile;
+import com.springtrainingtp.projectmanagement.service.UserProfileService;
 import com.springtrainingtp.projectmanagement.utils.HttpResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,24 @@ import org.springframework.web.bind.annotation.RestController;
  * @author HP
  */
 @RestController
-@RequestMapping("/project")
-public class ProjectController {
+@RequestMapping("/userprofile")
+public class UserProfileController {
 
     @Autowired
-    private ProjectService projectService;
+    private UserProfileService userProfileService;
 
-    //SAVE PROJECT REST API 
+    //SAVE USERPROFILE REST API 
     @PostMapping
-    public ResponseEntity saveProject(@RequestBody Project project) {
+    public ResponseEntity saveUserProfile(@RequestBody UserProfile userProfile) {
 
         HttpResponse hr = new HttpResponse();
 
         try {
-            Project p = this.projectService.saveProject(project);
-            if (project != null) {
+            UserProfile up = this.userProfileService.saveUserProfile(userProfile);
+            if (userProfile != null) {
                 hr.setCode("200");
                 hr.setMessage("succes");
-                hr.setData(p);
+                hr.setData(up);
             } else {
                 hr.setCode("400");
                 hr.setMessage("echec d'enregistrement");
@@ -57,16 +58,16 @@ public class ProjectController {
 
     }
 
-    //GET ALL PROJECT REST API
+    //GET ALL USERPROFILE REST API
     @GetMapping
-    public ResponseEntity getAllProjet() {
+    public ResponseEntity getAllUserProfile() {
         HttpResponse hr = new HttpResponse();
 
         try {
 
-            List<Project> projects = projectService.getAllProjects();
+            List<UserProfile> userProfiles = userProfileService.getAllUserProfiles();
             hr.setCode("200");
-            hr.setData(projects);
+            hr.setData(userProfiles);
             return ResponseEntity.ok(hr);
         } catch (Exception e) {
         }
@@ -77,25 +78,25 @@ public class ProjectController {
 
     //GET PROJECT BY ID REST API
     @GetMapping("{id}")
-    public ResponseEntity getProjectById(@PathVariable("id") Long projectId) {
+    public ResponseEntity getUserProfileById(@PathVariable("id") Long useprofileId) {
 
-        return ResponseEntity.ok(projectService.getProjectById(projectId));
+        return ResponseEntity.ok(userProfileService.getUserProfileById(useprofileId));
     }
 
-    //UPDATE PROJECT REST API
+    //UPDATE USERPROFILE REST API
     @PutMapping("{id}")
-    public ResponseEntity updateProject(@PathVariable("id") Long id, @RequestBody Project project) {
+    public ResponseEntity updateUserProfile(@PathVariable("id") Long id, @RequestBody UserProfile userProfile) {
 
-        return ResponseEntity.ok(projectService.updateProject(project, id));
+        return ResponseEntity.ok(userProfileService.updateUserProfile(userProfile, id));
 
     }
 
     //DELETE PROJECT REST API
     @DeleteMapping("{id}")
-    public ResponseEntity deleteProject(@PathVariable("id") Long id) {
+    public ResponseEntity deleteUserProfile(@PathVariable("id") Long id) {
 
-        projectService.deleteProject(id);
+        userProfileService.deleteUserProfile(id);
 
-        return ResponseEntity.ok("Project deleted successfuly");
+        return ResponseEntity.ok("User Profile deleted successfuly");
     }
 }

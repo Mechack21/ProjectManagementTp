@@ -9,28 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author HP
  */
 @Entity
-public class Project {
-    
+public class UserProfile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    
-    @ManyToOne
-    private UserProfile user;
-    
+    private String userName;
+    private String password;
 
-    public Project() {
+    public UserProfile() {
     }
 
-    public Project(Long id) {
+    public UserProfile(Long id) {
         this.id = id;
     }
 
@@ -42,26 +38,21 @@ public class Project {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public UserProfile getUser() {
-        return user;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUser(UserProfile user) {
-        this.user = user;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
- 
-
-
-    
     
     
 }

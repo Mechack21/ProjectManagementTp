@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.springtrainingtp.projectmanagement.service.impl;
+package com.springtrainingtp.projectmanagement.service;
 
 import com.springtrainingtp.projectmanagement.exception.ResourceNotFoundException;
 import com.springtrainingtp.projectmanagement.model.Project;
 import com.springtrainingtp.projectmanagement.repository.ProjectRepository;
 import com.springtrainingtp.projectmanagement.service.ProjectService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,11 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     public List<Project> getAllProjects() {
        
-        return projectRepository.findAll();
+        try {
+            return projectRepository.findAll();
+        } catch (Exception e) {
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ProjectServiceImpl implements ProjectService{
         Project existingProject = projectRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException("Project", "id", id));
         existingProject.setName(project.getName());
-        existingProject.setAuthor(project.getAuthor());
+        existingProject.setUser(project.getUser());
         projectRepository.save(existingProject);
         
         return existingProject;
