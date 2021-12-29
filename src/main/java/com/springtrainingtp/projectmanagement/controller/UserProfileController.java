@@ -5,7 +5,6 @@
  */
 package com.springtrainingtp.projectmanagement.controller;
 
-import com.springtrainingtp.projectmanagement.model.Project;
 import com.springtrainingtp.projectmanagement.model.UserProfile;
 import com.springtrainingtp.projectmanagement.service.UserProfileService;
 import com.springtrainingtp.projectmanagement.utils.HttpResponse;
@@ -77,14 +76,14 @@ public class UserProfileController {
     }
 
     //GET PROJECT BY ID REST API
-    @GetMapping("{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity getUserProfileById(@PathVariable("id") Long useprofileId) {
 
         return ResponseEntity.ok(userProfileService.getUserProfileById(useprofileId));
     }
 
     //UPDATE USERPROFILE REST API
-    @PutMapping("{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity updateUserProfile(@PathVariable("id") Long id, @RequestBody UserProfile userProfile) {
 
         return ResponseEntity.ok(userProfileService.updateUserProfile(userProfile, id));
@@ -92,11 +91,9 @@ public class UserProfileController {
     }
 
     //DELETE PROJECT REST API
-    @DeleteMapping("{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteUserProfile(@PathVariable("id") Long id) {
-
         userProfileService.deleteUserProfile(id);
-
         return ResponseEntity.ok("User Profile deleted successfuly");
     }
 }
